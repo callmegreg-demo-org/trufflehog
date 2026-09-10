@@ -52,10 +52,10 @@ func (s Scanner) FromData(ctx context.Context, verify bool, data []byte) (result
 				client = defaultClient
 			}
 			req, err := http.NewRequestWithContext(ctx, "GET", "https://cody-gateway.sourcegraph.com/v1/limits", nil)
-			req.Header.Add("Authorization", "Bearer "+resMatch)
 			if err != nil {
 				continue
 			}
+			req.Header.Add("Authorization", "Bearer "+resMatch)
 			res, err := client.Do(req)
 			if err == nil {
 				defer res.Body.Close()
