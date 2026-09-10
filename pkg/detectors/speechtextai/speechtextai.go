@@ -46,11 +46,10 @@ func (s Scanner) FromData(ctx context.Context, verify bool, data []byte) (result
 
 		if verify {
 			req, err := http.NewRequestWithContext(ctx, "POST", fmt.Sprintf("https://api.speechtext.ai/recognize?key=%s&language=en-US&punctuation=true&format=m4a", resMatch), nil)
-			req.Header.Add("Content-Type", "application/octet-stream")
-
 			if err != nil {
 				continue
 			}
+			req.Header.Add("Content-Type", "application/octet-stream")
 
 			res, err := client.Do(req)
 

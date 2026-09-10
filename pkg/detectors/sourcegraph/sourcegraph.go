@@ -57,12 +57,11 @@ func (s Scanner) FromData(ctx context.Context, verify bool, data []byte) (result
 			payload := strings.NewReader("{\"query\": \"query { currentUser { username } }\"}")
 
 			req, err := http.NewRequestWithContext(ctx, "POST", "https://sourcegraph.com/.api/graphql", payload)
-			req.Header.Add("Authorization", "token "+resMatch)
-			req.Header.Add("Content-Type", "application/json")
-
 			if err != nil {
 				continue
 			}
+			req.Header.Add("Authorization", "token "+resMatch)
+			req.Header.Add("Content-Type", "application/json")
 			res, err := client.Do(req)
 			if err == nil {
 				defer res.Body.Close()
